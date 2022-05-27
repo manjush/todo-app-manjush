@@ -16,11 +16,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping(
-        value = "/api/users",
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
-)
+@RequestMapping(value = "/api/users")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -42,7 +38,7 @@ public class UserController {
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
-    @PostMapping("")
+    @PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> addUser(@Valid @RequestBody UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
