@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(
-        value = "/api/users/{userId}/todos",
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
-)
+@RequestMapping(value = "/api/users/{userId}/todos")
 public class ToDoController {
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
@@ -29,12 +25,12 @@ public class ToDoController {
         this.todoRepository = todoRepository;
     }
 
-    @PostMapping("")
+    @PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ToDo> addTodo(@PathVariable Long userId, @RequestBody @Valid TodoDto todoDto) throws UserNotFoundException {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         ToDo todo = new ToDo();
         todo.setDescription(todoDto.getDescription());
-        todo.setCompleted(todo.getCompleted());
+        todo.setCompleted(todoDto.isCompleted());
         todo.setUser(user);
         ToDo savedToDo = todoRepository.save(todo);
         return ResponseEntity
