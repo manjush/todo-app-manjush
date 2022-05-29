@@ -21,4 +21,4 @@ fi
 
 _RUNJAVA="$JAVA_HOME"/bin/java
 
-$_RUNJAVA $JAVA_OPTS  -jar target/todo-app-manjush.jar --server.port=8080  "$@"
+$_RUNJAVA $JAVA_OPTS  -jar target/todo-app-manjush.jar  "$@"

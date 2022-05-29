@@ -5,6 +5,7 @@ import com.manjush.todo.dto.UserDto;
 import com.manjush.todo.entity.User;
 import com.manjush.todo.repository.TodoRepository;
 import com.manjush.todo.repository.UserRepository;
+import com.manjush.todo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -29,10 +30,8 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserRepository userRepository;
+    private UserService userService;
 
-    @MockBean
-    private TodoRepository todoRepository;
 
     @Test
     void testCreateUser() throws Exception {
@@ -40,7 +39,7 @@ public class UserControllerTest {
         request.setUsername("myusername");
         request.setPassword("mypassword");
 
-        when(userRepository.save(any(User.class))).thenReturn(new User());
+        when(userService.addUser(any(UserDto.class))).thenReturn(new User());
 
 
         mockMvc.perform(post("/api/users")
@@ -56,7 +55,7 @@ public class UserControllerTest {
         request.setUsername("");
         request.setPassword("mypassword");
 
-        when(userRepository.save(any(User.class))).thenReturn(new User());
+        when(userService.addUser(any(UserDto.class))).thenReturn(new User());
 
 
         mockMvc.perform(post("/api/users")
@@ -68,7 +67,7 @@ public class UserControllerTest {
 
     @Test
     void testDeleteUser() throws Exception {
-        when(userRepository.findById(anyLong())).thenReturn(Optional.of(new User()));
+        when(userService.getUserDetailsById(anyLong())).thenReturn(new User());
 
 
         mockMvc.perform(delete("/api/users/1")
