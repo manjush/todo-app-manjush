@@ -30,7 +30,7 @@ public class ToDoController {
     }
 
     /**
-     * add new toddo for a user
+     * add new toodo for a user
      *
      * @param todoDto {@link TodoDto}
      * @return ResponseEntity<ToDoo> {@link ResponseEntity} of {@link ToDo}
