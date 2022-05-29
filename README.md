@@ -1,4 +1,4 @@
-# todo-app REST API using Spring Boot 2.5.14, Java 11 and H2 Database 
+# REST API using Spring Boot 2.5.14, Java 11 and H2 Database 
 
 ## Compile and start
 
